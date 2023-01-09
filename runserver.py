@@ -57,9 +57,9 @@ def home():
             if file_path != "":
                 opic_path = opic_path+"\\"+file_path
                 current_pic_path = opic_path
+                numbers = int(request.form['howmuch'])
                 return render_template('HTMLPage1.html', files = files, img_path=current_pic_path)
         else:
-            print("here")
             mac_pic = funcs.do_masioc(current_pic_path, numbers)
             current_pic_path = mac_pic
             return redirect(url_for('change_masioc'))

@@ -16,8 +16,7 @@ def change_color(pic_path):
     img[:,1,:] = r2
     img[:,:,1] = r3
     paths = pic_path.split("\\")    
-    basis = paths[:2]
-    basis.append("changecolor")
+    basis = paths[:3]
     basis.append("chcol"+paths[-1].split(".")[0])
     new_name = "\\".join(basis)
     cv2.imwrite(f"{new_name}.jpeg" ,img)
@@ -28,13 +27,12 @@ def do_masioc(pic_path, a):
     img = cv2.imread(pic_path)
     size = img.shape         # 取得原始圖片的資訊
     level = a          # 縮小比例 ( 可當作馬賽克的等級 )
-    h = int(size[0]/a)   # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
-    w = int(size[1]/a)   # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
+    h = int(size[0]/level)   # 按照比例縮小後的高度 ( 使用 int 去除小數點 )
+    w = int(size[1]/level)   # 按照比例縮小後的寬度 ( 使用 int 去除小數點 )
     mosaic = cv2.resize(img, (w,h), interpolation=cv2.INTER_LINEAR)   # 根據縮小尺寸縮小
     mosaic = cv2.resize(mosaic, (size[1],size[0]), interpolation=cv2.INTER_NEAREST)
     paths = pic_path.split("\\")    
-    basis = paths[:2]
-    basis.append("masieco")
+    basis = paths[:3]
     basis.append("masi"+paths[-1].split(".")[0])
     new_name = "\\".join(basis)
     cv2.imwrite(f"{new_name}.jpeg" ,mosaic)
@@ -48,12 +46,12 @@ def img_sharp(pic_path):
     upper_treshold = int(min(255, (1.0 + 0.33) * median_intensity))
     img_canney = cv2.Canny(img, lower_treshold, upper_treshold)
     paths = pic_path.split("\\")    
-    basis = paths[:2]
-    basis.append("stylechange")
+    basis = paths[:3]
     basis.append("stych"+paths[-1].split(".")[0])
     new_name = "\\".join(basis)
+    # print(basis)
     cv2.imwrite(f"{new_name}.jpeg" ,img_canney)
     return f"{new_name}.jpeg"
 
 # if __name__ == '__main__':
-#     do_masioc(r"C:\Users\ASUS\Desktop\cloud_computing\static\pictures\origin\test.jpg", 10)
+#     img_sharp(r"C:\Users\ASUS\Desktop\cloud_computing\static\pictures\origin\test.jpg")
