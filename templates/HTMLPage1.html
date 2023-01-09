@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="..\static\StyleSheet1.css">
+</head>
+<body>
+
+    <div class="abc">
+        <!--<input type="file" accept="image/*" onchange="loadFile(event)">-->
+        <img id="output" src={{ img_path }} />
+    </div>
+
+    <div id="choose">
+        <form method="post">
+            <select>
+                <option>下面是找所有找到的圖片</option>
+                {% for file in files%}
+                <option name={{ files.index(file) }}>{{file}}</option>
+                {%endfor%}
+            </select>
+        </form>
+    </div>
+
+    <div id="kind">
+        <input type="text" style="width: 120px; background-color: #434343;" placeholder="風格" readonly>
+    </div>
+
+    <div class="color">
+        <input id="one" type="button" value="Filter" style=" width:120px ; background-color: #686666; border: #949393; color: rgb(242, 244, 247); border-radius: 5px" onclick="window.location.href='{{ url_for("change_color") }}'">
+        <input id="two" style="width:25px; height:20px" readonly>
+    </div>
+
+    <div id="sty">
+        <input onclick="window.location.href='{{ url_for("change_style") }}'" type="button" value="Change Style" style=" width:120px ; background-color: #686666; border: #949393; color: rgb(242, 244, 247); border-radius: 5px">
+    </div>
+
+    <div id="opacity" style="color:rgb(242, 244, 247)">
+        <form method="POST">
+            <input id="file_name" type="text" placeholder="輸入你要更改檔案名稱" name="file_name">
+            <input id="return" type="submit" name="send" value="send_pic_path">
+            <input id="Opa_button" onclick="window.location.href='{{ url_for("change_masioc") }}'" value="applys" type="submit" name="send" style="width: 120px; background-color: #686666; border: #949393; color: rgb(242, 244, 247); border-radius: 5px;" >
+            <input id="Opa_text" name="howmuch" type="text" style="width: 120px; background-color: #434343;" placeholder="0~100" value="30">
+        </form>
+    </div>
+
+</body>
